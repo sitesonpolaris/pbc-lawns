@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowIcon, CheckIcon, Crown, PhoneIcon } from "@/components/Icons";
 import { WorkCompare } from "@/components/WorkCompare";
 import { services, site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
+};
 
 export default function Home() {
   return (

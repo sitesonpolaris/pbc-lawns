@@ -5,6 +5,11 @@
 **PBC = Perfection by Cooper.** Affordable lawn care, Charlotte NC area. Tagline: "Affordable lawn service that perfects quality over quantity."
 Redesign of https://www.pbclawns.com (Wix). Built by Sites on Polaris.
 
+## Deploy
+- Live: https://pbc-lawns.netlify.app · Netlify project `pbc-lawns`, site id `fe9198ed-2412-4a1c-83e7-b9b2d8079c50` (team sitesonpolaris).
+- First deploys were uploads via the Netlify MCP deploy command. Link the GitHub repo in Netlify (Project configuration → Build & deploy → Link repository) for continuous deploy.
+- Cloud sessions: use the `pbc-lawns` environment (allows the Supabase host and Netlify deploy hosts). Run `next start` with `NODE_USE_ENV_PROXY=1` so server fetches go through the proxy.
+
 ## Contact (from current site)
 - Phone (704) 219-0676 · pbc.lawns@gmail.com
 - No address, hours or service-area towns are published. Inferred "Charlotte, NC and surrounding towns" (704 code + job photos). **OWNER-CONFIRM.**
