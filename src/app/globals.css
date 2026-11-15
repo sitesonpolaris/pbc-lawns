@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+  /* Turf & Crown — taken from the PBC logo and Cooper's striped lawns */
+  --color-turf: #10291b;        /* deep turf: dark fields, footer */
+  --color-turf-2: #173a26;      /* raised surface on turf */
+  --color-stripe: #2e6b3a;      /* dark mower pass */
+  --color-stripe-light: #3f8a48;/* light mower pass */
+  --color-gold: #e0b23a;        /* crown gold: the one accent */
+  --color-gold-deep: #b98c1c;   /* gold for text on light ground (AA on ground) */
+  --color-ink: #0c0e0b;         /* logo black */
+  --color-ground: #f3f5ef;      /* page ground */
+  --color-mist: #e4eadf;        /* tone step on ground */
+  --color-mist-2: #d5ddcf;
+  --color-muted: #4a5548;       /* secondary text on ground (AA) */
+  --color-danger: #a1261b;
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  ::selection { background: var(--color-gold); color: var(--color-ink); }
+  input, select, textarea { font-size: 16px; }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
+  }
+
+  /* Mower stripes: hard-edged alternating passes (a pattern, not a fade) */
+  .stripes {
+    background-color: var(--color-stripe);
+    background-image: repeating-linear-gradient(
+      100deg,
+      var(--color-stripe) 0 72px,
+      #347640 72px 144px
+    );
+  }
+  .stripes-turf {
+    background-color: var(--color-turf);
+    background-image: repeating-linear-gradient(
+      100deg,
+      var(--color-turf) 0 90px,
+      var(--color-turf-2) 90px 180px
+    );
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    transition: transform 160ms var(--ease-out-quart), background-color 160ms, color 160ms;
+    user-select: none;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-gold { background: var(--color-gold); color: var(--color-ink); }
+  .btn-gold:hover { background: #ebc254; }
+  .btn-ink { background: var(--color-ink); color: var(--color-ground); }
+  .btn-ink:hover { background: var(--color-turf); }
+  .btn-light { background: var(--color-ground); color: var(--color-ink); }
+  .btn-light:hover { background: #fff; }
+  .btn-ghost-light { color: var(--color-ground); background: rgb(243 245 239 / 0.12); }
+  .btn-ghost-light:hover { background: rgb(243 245 239 / 0.22); }
+
+  .field {
+    width: 100%;
+    border-radius: 0.6rem;
+    background: #fff;
+    border: 1.5px solid var(--color-mist-2);
+    padding: 0.7rem 0.9rem;
+    color: var(--color-ink);
+    transition: border-color 140ms;
+  }
+  .field:focus { outline: none; border-color: var(--color-stripe); box-shadow: 0 0 0 3px rgb(63 138 72 / 0.25); }
+  .label { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.35rem; }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .js .reveal:not(.is-in) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .js .reveal {
+    transition: opacity 700ms var(--ease-out-quart), transform 700ms var(--ease-out-quart);
+    transition-delay: var(--d, 0ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal:not(.is-in) { transform: none; }
+  .js .reveal { transition: opacity 300ms linear; }
+  * { animation-duration: 0.01ms !important; }
+}
